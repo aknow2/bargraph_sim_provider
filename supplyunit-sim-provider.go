@@ -104,6 +104,7 @@ type Pos struct {
 	Lat   float64
 	Lon   float64
 	Label string
+	Type  pGeo.BarType
 }
 
 var posList = []*Pos{
@@ -111,36 +112,43 @@ var posList = []*Pos{
 		Lon:   136.881161,
 		Lat:   35.168587,
 		Label: "名古屋駅",
+		Type:  pGeo.BarType_BT_BOX_VARCOLOR,
 	},
 	&Pos{
 		Lon:   136.898981,
 		Lat:   35.187595,
 		Label: "名古屋城",
+		Type:  pGeo.BarType_BT_HEX_VARCOLOR,
 	},
 	&Pos{
 		Lon:   136.970909,
 		Lat:   35.154811,
 		Label: "名古屋大学",
+		Type:  pGeo.BarType_BT_BOX_VARCOLOR,
 	},
 	&Pos{
 		Lon:   136.811031,
 		Lat:   35.374950,
 		Label: "アクアトト・ぎふ",
+		Type:  pGeo.BarType_BT_HEX_VARCOLOR,
 	},
 	&Pos{
 		Lon:   136.730681,
 		Lat:   35.035158,
 		Label: "長島スパーランド",
+		Type:  pGeo.BarType_BT_HEX_FIXCOLOR,
 	},
 	&Pos{
 		Lon:   136.843527,
 		Lat:   35.050638,
 		Label: "レゴランド",
+		Type:  pGeo.BarType_BT_HEX_FIXCOLOR,
 	},
 	&Pos{
 		Lon:   136.811778,
 		Lat:   34.863682,
 		Label: "セントレア",
+		Type:  pGeo.BarType_BT_HEX_FIXCOLOR,
 	},
 }
 
@@ -154,7 +162,7 @@ func updateVisualization(clt *sxutil.SXServiceClient) {
 			Ts: &timestamp.Timestamp{
 				Seconds: time.Now().Unix(),
 			},
-			Type:   pGeo.BarType_BT_BOX_VARCOLOR,
+			Type:   pos.Type,
 			Color:  rand.Int31n(0xFFFF),
 			Lon:    pos.Lon,
 			Lat:    pos.Lat,
