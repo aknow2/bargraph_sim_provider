@@ -172,17 +172,17 @@ func updateVisualization(clt *sxutil.SXServiceClient) {
 			BarData: []*pGeo.BarData{
 				&pGeo.BarData{
 					Value: math.Floor(rand.Float64() * 300),
-					Label: "食料",
+					Label: "売上",
 					Color: 0xff0000,
 				},
 				&pGeo.BarData{
 					Value: math.Floor(rand.Float64() * 300),
-					Label: "水",
+					Label: "来客数",
 					Color: 0x00FF00,
 				},
 				&pGeo.BarData{
 					Value: math.Floor(rand.Float64() * 300),
-					Label: "毛布",
+					Label: "混雑指数",
 					Color: 0x0000FF,
 				},
 			},
@@ -236,7 +236,7 @@ func main() {
 		if count%10 == 0 {
 			log.Printf("Update Supplyunit")
 			updateVisualization(supplyClient)
-			time.Sleep(5000 * time.Millisecond)
+			time.Sleep(2500 * time.Millisecond)
 		}
 		count++
 	}
