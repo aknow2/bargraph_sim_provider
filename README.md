@@ -1,5 +1,10 @@
-# provider-sim-pcounter
+# bargraph-sim-provider
 
-Simulation Provider for People Counter.
-subscribe -&gt; agent-location 
-notify -&gt; pcounter
+Simulation Provider for Geo BarGraph data.  
+  
+### getting started
+``` shell
+# run nodeserv & server 
+go build
+.\bargraph-sim-provider.exe
+```

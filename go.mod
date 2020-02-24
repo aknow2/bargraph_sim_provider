@@ -1,4 +1,4 @@
-module supplyunit-sim-provider
+module bargraph-sim-provider
 
 go 1.13
 

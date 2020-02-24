@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math"
 	"math/rand"
 	"sync"
 	"time"
@@ -163,24 +164,24 @@ func updateVisualization(clt *sxutil.SXServiceClient) {
 				Seconds: time.Now().Unix(),
 			},
 			Type:   pos.Type,
-			Color:  rand.Int31n(0xFFFF),
+			Color:  0x00FF00,
 			Lon:    pos.Lon,
 			Lat:    pos.Lat,
 			Width:  300,
 			Radius: 900,
 			BarData: []*pGeo.BarData{
 				&pGeo.BarData{
-					Value: rand.Float64() * 300,
+					Value: math.Floor(rand.Float64() * 300),
 					Label: "食料",
 					Color: 0xff0000,
 				},
 				&pGeo.BarData{
-					Value: rand.Float64() * 300,
+					Value: math.Floor(rand.Float64() * 300),
 					Label: "水",
 					Color: 0x00FF00,
 				},
 				&pGeo.BarData{
-					Value: rand.Float64() * 300,
+					Value: math.Floor(rand.Float64() * 300),
 					Label: "毛布",
 					Color: 0x0000FF,
 				},
