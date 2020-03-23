@@ -102,54 +102,62 @@ func getStartPoint(pgn *orb.Polygon) orb.Point {
 }
 
 type Pos struct {
-	Lat   float64
-	Lon   float64
-	Label string
-	Type  pGeo.BarType
+	Lat       float64
+	Lon       float64
+	Label     string
+	ColorType pGeo.BarColorType
+	ShapeType pGeo.BarShapeType
 }
 
 var posList = []*Pos{
 	&Pos{
-		Lon:   136.881161,
-		Lat:   35.168587,
-		Label: "名古屋駅",
-		Type:  pGeo.BarType_BT_BOX_VARCOLOR,
+		Lon:       136.881161,
+		Lat:       35.168587,
+		Label:     "名古屋駅",
+		ShapeType: pGeo.BarShapeType_BOX,
+		ColorType: pGeo.BarColorType_VARCOLOR,
 	},
 	&Pos{
-		Lon:   136.898981,
-		Lat:   35.187595,
-		Label: "名古屋城",
-		Type:  pGeo.BarType_BT_HEX_VARCOLOR,
+		Lon:       136.898981,
+		Lat:       35.187595,
+		Label:     "名古屋城",
+		ShapeType: pGeo.BarShapeType_BOX,
+		ColorType: pGeo.BarColorType_FIXCOLOR,
 	},
 	&Pos{
-		Lon:   136.970909,
-		Lat:   35.154811,
-		Label: "名古屋大学",
-		Type:  pGeo.BarType_BT_BOX_VARCOLOR,
+		Lon:       136.970909,
+		Lat:       35.154811,
+		Label:     "名古屋大学",
+		ShapeType: pGeo.BarShapeType_HEX,
+		ColorType: pGeo.BarColorType_FIXCOLOR,
 	},
 	&Pos{
-		Lon:   136.811031,
-		Lat:   35.374950,
-		Label: "アクアトト・ぎふ",
-		Type:  pGeo.BarType_BT_HEX_VARCOLOR,
+		Lon:       136.811031,
+		Lat:       35.374950,
+		Label:     "アクアトト・ぎふ",
+		ShapeType: pGeo.BarShapeType_HEX,
+		ColorType: pGeo.BarColorType_VARCOLOR,
 	},
 	&Pos{
-		Lon:   136.730681,
-		Lat:   35.035158,
-		Label: "長島スパーランド",
-		Type:  pGeo.BarType_BT_HEX_FIXCOLOR,
+		Lon:       136.730681,
+		Lat:       35.035158,
+		Label:     "長島スパーランド",
+		ShapeType: pGeo.BarShapeType_HEX,
+		ColorType: pGeo.BarColorType_VARCOLOR,
 	},
 	&Pos{
-		Lon:   136.843527,
-		Lat:   35.050638,
-		Label: "レゴランド",
-		Type:  pGeo.BarType_BT_HEX_FIXCOLOR,
+		Lon:       136.843527,
+		Lat:       35.050638,
+		Label:     "レゴランド",
+		ShapeType: pGeo.BarShapeType_HEX,
+		ColorType: pGeo.BarColorType_VARCOLOR,
 	},
 	&Pos{
-		Lon:   136.811778,
-		Lat:   34.863682,
-		Label: "セントレア",
-		Type:  pGeo.BarType_BT_HEX_FIXCOLOR,
+		Lon:       136.811778,
+		Lat:       34.863682,
+		Label:     "セントレア",
+		ShapeType: pGeo.BarShapeType_HEX,
+		ColorType: pGeo.BarColorType_VARCOLOR,
 	},
 }
 
@@ -161,14 +169,15 @@ func updateVisualization(clt *sxutil.SXServiceClient) {
 		bars = append(bars, &pGeo.BarGraph{
 			Id: int32(i),
 			Ts: &timestamp.Timestamp{
-				Seconds: time.Now().Unix(),
+				Seconds: time.Now().Unix() + int64(rand.Float64()*5),
 			},
-			Type:   pos.Type,
-			Color:  0x00FF00,
-			Lon:    pos.Lon,
-			Lat:    pos.Lat,
-			Width:  300,
-			Radius: 900,
+			Color:     0x00FF00,
+			Lon:       pos.Lon,
+			Lat:       pos.Lat,
+			ShapeType: pos.ShapeType,
+			ColorType: pos.ColorType,
+			Width:     300,
+			Radius:    1300,
 			BarData: []*pGeo.BarData{
 				&pGeo.BarData{
 					Value: math.Floor(rand.Float64() * 300),
@@ -186,8 +195,8 @@ func updateVisualization(clt *sxutil.SXServiceClient) {
 					Color: 0x0000FF,
 				},
 			},
-			Min:  100,
-			Max:  1500,
+			Min:  40,
+			Max:  300,
 			Text: pos.Label,
 		})
 	}
